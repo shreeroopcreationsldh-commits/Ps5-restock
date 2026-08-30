@@ -50,7 +50,7 @@ def process_alert(data):
     #   "product_key":"amazon_ps5_slim_disc",
     #   "store":"Amazon",
     #   "name":"PS5 Slim Disc Edition",
-    #   "price":"₹49,990",
+    #   "price":"â¹49,990",
     #   "url":"https://...",
     #   "available":true,
     #   "deliverable_pin":"141001",
@@ -87,14 +87,14 @@ def process_alert(data):
     # Alert only on UNAVAILABLE -> AVAILABLE transition.
     if effective and not previous:
         text = (
-            "🚨 PS5 AVAILABLE!\n\n"
-            f"🎮 {data['name']}\n"
-            f"🏪 {data['store']}\n"
-            f"💰 {data.get('price', 'Check product page')}\n"
-            f"📍 Deliverable to {PIN}\n"
-            f"🚚 {data.get('delivery', 'Check product page')}\n\n"
-            f"🔗 {data['url']}\n\n"
-            f"⏰ {datetime.now().strftime('%d-%m-%Y %I:%M:%S %p')}"
+            "ð¨ PS5 AVAILABLE!\n\n"
+            f"ð® {data['name']}\n"
+            f"ðª {data['store']}\n"
+            f"ð° {data.get('price', 'Check product page')}\n"
+            f"ð Deliverable to {PIN}\n"
+            f"ð {data.get('delivery', 'Check product page')}\n\n"
+            f"ð {data['url']}\n\n"
+            f"â° {datetime.now().strftime('%d-%m-%Y %I:%M:%S %p')}"
         )
         telegram_send(text)
         return True, "Alert sent"
@@ -138,14 +138,14 @@ def telegram_updates():
                 if text == "/start":
                     if not CHAT_ID:
                         telegram_send(
-                            f"✅ PS5 Restock Bot connected!\n\n"
-                            f"📍 Monitoring delivery PIN: {PIN}\n"
-                            f"🎮 Amazon + Flipkart source integration is ready to be connected.",
+                            f"â PS5 Restock Bot connected!\n\n"
+                            f"ð Monitoring delivery PIN: {PIN}\n"
+                            f"ð® Amazon + Flipkart source integration is ready to be connected.",
                             chat_id
                         )
                     else:
                         telegram_send(
-                            f"✅ Bot is running.\n📍 Delivery PIN: {PIN}\n"
+                            f"â Bot is running.\nð Delivery PIN: {PIN}\n"
                             "Use /status to check the bot.",
                             chat_id
                         )
@@ -158,27 +158,27 @@ def telegram_updates():
                     ).fetchone()[0]
                     conn.close()
                     telegram_send(
-                        f"🤖 PS5 Restock Bot\n\n"
-                        f"📍 PIN: {PIN}\n"
-                        f"📦 Tracked products: {count}\n"
-                        f"🟢 Currently available: {available}\n"
-                        f"🕐 {datetime.now().strftime('%d-%m-%Y %I:%M:%S %p')}",
+                        f"ð¤ PS5 Restock Bot\n\n"
+                        f"ð PIN: {PIN}\n"
+                        f"ð¦ Tracked products: {count}\n"
+                        f"ð¢ Currently available: {available}\n"
+                        f"ð {datetime.now().strftime('%d-%m-%Y %I:%M:%S %p')}",
                         chat_id
                     )
 
                 elif text == "/check":
                     telegram_send(
-                        "🔎 Manual check requested.\n"
+                        "ð Manual check requested.\n"
                         "The Telegram layer is working; stock checks require an authorized Amazon/Flipkart feed or API connection.",
                         chat_id
                     )
 
                 elif text == "/help":
                     telegram_send(
-                        "/start — connect bot\n"
-                        "/status — bot status\n"
-                        "/check — manual check\n"
-                        "/help — commands",
+                        "/start â connect bot\n"
+                        "/status â bot status\n"
+                        "/check â manual check\n"
+                        "/help â commands",
                         chat_id
                     )
         except Exception as e:
